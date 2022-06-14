@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: sleep
+  annotations:
+    helm.sh/hook: post-install
+spec:
+  template:
+    spec:
+      containers:
+      - name: sleep
+        image: busybox:1.28
+        command: ["sh",  "-c", "echo Hello ! && sleep 10"]
+      restartPolicy: Never
+  backoffLimit: 4
